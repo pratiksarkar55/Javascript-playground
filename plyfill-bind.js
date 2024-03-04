@@ -19,4 +19,4 @@ let displayName = function (...args) {
 };
 
 //displayName.bind(obj, "Hi")("Hello");
-displayName.customBind(obj, "Hi")();
+displayName.customBind(obj, "Hi")("Roni");

@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>Tab Switcher</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="button-container">
+      <button onclick="switchTab(1)">Tab 1</button>
+      <button onclick="switchTab(2)">Tab 2</button>
+      <button onclick="switchTab(3)">Tab 3</button>
+    </div>
+    <div class="text-container">
+      <div id="tab1" class="tab-content active">
+        <h2>Tab 1 Content</h2>
+        <p>This is the content of Tab 1.</p>
+      </div>
+
+      <div id="tab2" class="tab-content inactive">
+        <h2>Tab 2 Content</h2>
+        <p>This is the content of Tab 2.</p>
+      </div>
+
+      <div id="tab3" class="tab-content inactive">
+        <h2>Tab 3 Content</h2>
+        <p>This is the content of Tab 3.</p>
+      </div>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>

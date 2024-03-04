@@ -45,49 +45,50 @@
 // arr2.__proto__ = arrayObj;
 // console.log(arr2.name);
 
+//__proto__ is used to access or set the prototype of an individual object, while prototype is used in the context of constructor functions to define properties and methods that will be shared by instances created with that constructor.
+
 // -------------------------TYPES OF INHERITANCE IN JS-------------------------------------------------
 //---------------protypal inheritance----------------
-// function Parent() {
-//   this.name = "parent";
-// }
-// function Child() {}
-// function Child1() {}
-// function Child2() {}
-// function Child3() {}
-// Parent.prototype.sayHello = function () {
-//   console.log(this.name);
-// };
-// Child1.prototype = Object.create(Parent.prototype);
-// Child2.prototype = Object.create(new Parent());
-// Child3.prototype = new Parent();
+/*
+In prototypal inheritance, objects inherit directly from other objects. 
+Each object has a prototype, and it inherits properties 
+and methods from that prototype.
+*/
 
-// let c = new Child();
-// let c1 = new Child1();
-// let c2 = new Child2();
-// let c3 = new Child3();
-// console.log("child", c);
-// console.log("child1 ", c1);
-// console.log("child2 ", c2);
-// console.log("child3 ", c3);
-// //c.sayHello(); //error
-// c1.sayHello();
-// c2.sayHello();
-// c3.sayHello();
+let parentObject = {
+  displayName:function(){
+    console.log("Name is " + this.name);
+  }
+}
 
-//constructor inheritance
-// function Parent(name) {
+let child = Object.create(parentObject);
+console.log(child);
+child.name = "roni"
+child.displayName();
+
+
+
+// Constructor based inheritance(pseudo-class inheritance)
+// function Parent(name, dob) {
 //   this.name = name;
+//   this.dob = dob;
 // }
 
-// function Child(firstname, lastName) {
-//   this.lastName = lastName;
-//   Parent.call(this, firstname);
+// function Child(name,age,dob) {
+//   this.age = age;
+//   Parent.call(this,name,dob);
+//   this.getDetails=function(){
+//     console.log("My name is " + this.name + " and age is " + this.age + "and dob is " + this.dob);
+//   }
+   
+//   // this won't be accessible outside Child due to scoping
+//   function localFunction(){}
 // }
+// Child.prototype = Object.create(Parent.prototype);
+// console.log(new Child("Pratik",30,"1993"));
 
-// let childObj = new Child("Pratik", "Sarkar");
-// console.log(childObj);
 
-//----------------class inheritance--------------------
+//----------------classical inheritance--------------------
 
 // class Parent {
 //   constructor(name) {
@@ -108,49 +109,25 @@
 // const childObj = new Child("Alice", 7);
 // console.log(childObj);
 
-// converting this to plain vanilla js
 
-Function.prototype.mycall = function (...args) {
-  let instance = args[0];
-  let rest = args.slice(1);
-  let obj = new this();
-  console.log(obj);
-  let index = 0;
-  for (let key of Object.keys(obj)) {
-    instance[key] = rest[index];
-    obj[key] = rest[index];
-    index++;
-  }
-  console.log(obj);
-};
 
-function Parent(name, dob) {
-  this.name = name;
-  this.dob = dob;
-}
 
-function Child(name, age, dob) {
-  Parent.mycall(this, name, dob);
-  this.age = age;
-}
 
-Parent.prototype.sayHello = function () {
-  console.log(
-    `My name is ${this.name} , my dob is ${this.dob} and my age is ${this.age}`
-  );
-};
-Child.prototype = Object.create(Parent.prototype);
-Child.prototype.constructor = Child;
-let child = new Child("Alice", 7, "02-07-1993");
-console.log(child);
-child.sayHello();
+
+
+
+
+// Child.prototype.constructor = Child;
+// let child = new Child("Alice", 7, "02-07-1993");
+// console.log(child);
+// child.sayHello();
 
 // //Important
 // let test = Object.create({ hello: "hello" });
 // console.log(test);
 
 // ---------------------mixins------
-
+//are a way to enhance the functionality of a class or an object by combining (or mixing in) methods and properties from other objects.
 // function canCry() {
 //   console.log("Crying...");
 // }
