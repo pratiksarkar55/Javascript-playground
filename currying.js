@@ -5,6 +5,8 @@ function multiply(x, y) {
 }
 
 const multiplyByBind = multiply.bind(this, 2);
+//The JavaScript specification states that the this context and the initial arguments of a function created by bind cannot be overridden by a subsequent bind call.
+// So 3 is taken as 2nd argument to multiply function.
 const output = multiplyByBind.bind(this, 3);
 console.log(output()); //6
 

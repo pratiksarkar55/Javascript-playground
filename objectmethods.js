@@ -6,18 +6,20 @@ let obj1 = {
   },
 };
 
-console.log(Object.entries(obj1));
+// console.log(Object.entries(obj1));
 
-console.log(obj1.hasOwnProperty("address"));
+// console.log(obj1.hasOwnProperty("address"));
 
-// Object.freeze(obj1);
+// Object.freeze(obj1); freeze is very strict
 
-// obj1["secondName"] = "male"; //can't change exisitng property value
-
-// console.log(obj1);
-
-// Object.seal(obj1); // can change exsiting property value.
-
-// obj1["secondName"] = "male";
+// obj1["secondName"] = "Sarkar"; //can't change exisitng property value
+// obj1["age"] = 30; // can't add new property
 
 // console.log(obj1);
+
+Object.seal(obj1); // can change exsiting property value.
+
+obj1["secondName"] = "Sarkar";
+obj1["age"] = 30; // can't add new property
+
+console.log(obj1);
