@@ -1,3 +1,5 @@
+console.log(NaN === NaN); //false
+
 let a = 1 + "2";
 console.log(a); //12 as + prioritizes string concatenation when one of the operands is string.
 a = 1 - "2";
