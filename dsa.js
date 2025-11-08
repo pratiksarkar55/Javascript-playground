@@ -6,6 +6,12 @@ function customBind(...args) {
   };
 }
 
+function customApply(...args) {
+  func = this;
+  restArgs = args.slice(1);
+  return func.call(args[0], ...restArgs);
+}
+
 Function.prototype.customBind = customBind;
 
 // Example usage:
@@ -121,3 +127,20 @@ function cloneDeep(obj) {
   }
   return output;
 }
+
+// spread operator
+
+obj1 = {
+  name: "roni",
+};
+
+obj2 = {
+  age: 20,
+};
+
+testObj = { ...obj1, ...obj2 };
+console.log(testObj);
+
+// rest operator
+let { age, ...rest } = { name: "roni", age: 2, salary: 2000 };
+console.log(rest);
