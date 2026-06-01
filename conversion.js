@@ -37,3 +37,9 @@ a = Boolean(null);
 console.log(a); //false
 a = Boolean(undefined);
 console.log(a); //fasle
+
+console.log(typeof null); //'object'
+console.log(typeof undefined); // 'undefined'
+console.log(1 + null); // 1+0 = 1
+console.log(1 + undefined); // NaN
+console.log(1 + {}); // [object Object]

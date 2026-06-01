@@ -1,29 +1,30 @@
-// function Person(name, age) {
-//   this.name = name;
-//   this.age = age;
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
 
-//   // this is not memory efficient as it creates a new method for each instance
-//   this.displayInfoMethod = function () {
-//     console.log(`Name: ${this.name}, Age: ${this.age}`);
-//   };
-// }
+  // this is not memory efficient as it creates a new method for each instance
+  this.displayInfoMethod = function () {
+    console.log(`Name: ${this.name}, Age: ${this.age}`);
+  };
+}
 
-// both person1 and person2 instances share reference to the same prototype
-// const person1 = new Person("Alice", 30);
-// const person2 = new Person("Pratik", 32);
+//both person1 and person2 instances share reference to the same prototype
+const person1 = new Person("Alice", 30);
+const person2 = new Person("Pratik", 32);
 // console.log(person1);
 // console.log(person2);
 
-// Person.prototype.displayInfoArr = () => {
-//   console.log(`Name: ${this.name}, Age: ${this.age}`);
-// };
+// udefined as it's defined in global space
+Person.prototype.displayInfoArr = () => {
+  console.log(`Name: ${this.name}, Age: ${this.age}`);
+};
 
 // // This is memory efficient as it shares the method across all instances
-// Person.prototype.displayInfo = function () {
-//   console.log(`Name: ${this.name}, Age: ${this.age}`);
-// };
-// person1.displayInfo();
-// person1.displayInfoArr();
+Person.prototype.displayInfo = function () {
+  console.log(`Name: ${this.name}, Age: ${this.age}`);
+};
+person1.displayInfo();
+person1.displayInfoArr();
 
 // console.log(Object.hasOwn(person1, "displayInfoMethod")); // true
 // console.log(Object.hasOwn(person1, "displayInfo")); // false as it's inherited from prototype
@@ -83,17 +84,17 @@
 
 // ----------------------------------------Inheritance using object literals---------------------------------------------------
 
-const person = {
-  displayInfo: function () {
-    console.log(`Name: ${this.name}, Age: ${this.age}`);
-  },
-};
-console.log(person); // null
-const employee = Object.create(person);
-console.log(employee);
-employee.name = "David";
-employee.age = 35;
-employee.displayInfo();
-console.log(Object.getPrototypeOf(employee));
-console.log(Object.getPrototypeOf(person));
-console.log(employee.__proto__ === person);
+// const person = {
+//   displayInfo: function () {
+//     console.log(`Name: ${this.name}, Age: ${this.age}`);
+//   },
+// };
+// console.log(person); // null
+// const employee = Object.create(person);
+// console.log(employee);
+// employee.name = "David";
+// employee.age = 35;
+// employee.displayInfo();
+// console.log(Object.getPrototypeOf(employee));
+// console.log(Object.getPrototypeOf(person));
+// console.log(employee.__proto__ === person);

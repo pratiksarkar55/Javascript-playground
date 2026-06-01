@@ -55,18 +55,16 @@ Each object has a prototype, and it inherits properties
 and methods from that prototype.
 */
 
-let parentObject = {
-  displayName:function(){
-    console.log("Name is " + this.name);
-  }
-}
+// let parentObject = {
+//   displayName:function(){
+//     console.log("Name is " + this.name);
+//   }
+// }
 
-let child = Object.create(parentObject);
-console.log(child);
-child.name = "roni"
-child.displayName();
-
-
+// let child = Object.create(parentObject);
+// console.log(child);
+// child.name = "roni"
+// child.displayName();
 
 // Constructor based inheritance(pseudo-class inheritance)
 // function Parent(name, dob) {
@@ -80,13 +78,12 @@ child.displayName();
 //   this.getDetails=function(){
 //     console.log("My name is " + this.name + " and age is " + this.age + "and dob is " + this.dob);
 //   }
-   
+
 //   // this won't be accessible outside Child due to scoping
 //   function localFunction(){}
 // }
 // Child.prototype = Object.create(Parent.prototype);
 // console.log(new Child("Pratik",30,"1993"));
-
 
 //----------------classical inheritance--------------------
 
@@ -108,14 +105,6 @@ child.displayName();
 
 // const childObj = new Child("Alice", 7);
 // console.log(childObj);
-
-
-
-
-
-
-
-
 
 // Child.prototype.constructor = Child;
 // let child = new Child("Alice", 7, "02-07-1993");
@@ -156,3 +145,74 @@ child.displayName();
 // let child2 = new Child2();
 // console.log(child2);
 // child2.canCry2();
+
+// Protypal inheritance
+
+// let parentObj = {
+//   display: function (name) {
+//     console.log(`My name is ${name}`);
+//   },
+// };
+
+// console.log(parentObj);
+
+// let childObj = Object.create(parentObj);
+// console.log(childObj.__proto__);
+// childObj.display("Pratik");
+
+// class based inheritance
+
+// class Parent {
+//   #age = 20;
+//   constructor(name) {
+//     this.name = name;
+//     this.#age = 30;
+//   }
+
+//   display() {
+//     console.log(`My name is ${this.name} and age is ${this.#age}`);
+//   }
+// }
+
+// class Child extends Parent {
+//   constructor(name) {
+//     super(name);
+//   }
+// }
+
+// const c = new Child("Pratik");
+
+// const p = new Parent("roni");
+
+// c.display();
+
+// Constructor function inheritance
+
+function ParentClass(name, age) {
+  this.name = name;
+  this.age = age;
+  this.test = function () {
+    console.log("test");
+  };
+}
+
+function ChildClass(name, age) {
+  ParentClass.call(this, name, age);
+}
+
+ParentClass.prototype.display = function () {
+  console.log(`My name is ${this.name} and age is ${this.age}`);
+};
+
+ChildClass.prototype = Object.create(ParentClass.prototype);
+
+ChildClass.prototype.constructor = ChildClass;
+const c = new ChildClass("Pratik", 20);
+c.display();
+c.test();
+
+//const p = new ParentClass("test", 20);
+
+// console.log(ParentClass.prototype);
+// const p = new ChildClass("pratik", 23);
+// console.log(p.display());

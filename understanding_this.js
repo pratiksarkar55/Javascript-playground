@@ -105,7 +105,7 @@ let newObj = {
   test: function () {
     console.log(this.name); // PRATIK
     setTimeout(function () {
-      console.log(this); // window/undefined in strict mode/non-strict mode as setTimeout is called on basis of window
+      console.log(this); // window/undefined in non-strict mode/strict mode as setTimeout is called on basis of window
     }, 3000);
   },
   testArrow: function () {

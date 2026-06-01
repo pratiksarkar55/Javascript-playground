@@ -1,99 +1,89 @@
-console.log("test hello world");
-// d.ts files  Add type checking to plain JavaScript libraries or files.
-export type Test = string;
+console.log("Hello world from ts");
 
-export class Person<T> {
-  private name: T;
-  constructor(name: T) {
-    this.name = name;
-  }
-  display() {
-    console.log("My name is", this.name);
-  }
-}
+//merging
+// interface Person {
+//   name: string;
+// }
 
-// difference between interface and type
+// interface Person {
+//   age: number;
+// }
 
-// Typescript merges interfaces with same name
-interface User {
+// type MergedType = Person;
+
+// let obj: MergedType = {
+//   name: "Pratik",
+//   age: 23,
+// };
+
+// extends
+// interface PersonExtended extends Person {
+//   phone: string;
+// }
+
+// let obj2: PersonExtended = {
+//   name: "Pratik",
+//   age: 23,
+//   phone: "",
+// };
+
+// only Interface are applicalble in objects
+
+// types are applicable for objects,primitive types,tuples
+
+// types allow union and intersection
+
+//types doesn't allow merging
+// type A = { name: string };
+
+// type B = { age: number };
+
+// type C = A | B; // union
+
+// type D = A & B; // intersection
+
+// let obj3: D = {
+//   name: "",
+//   age: 23,
+// };
+
+//-----------------------Utility types----------------
+// interface Person {
+//   name: string;
+//   age: number;
+//   phone: String;
+// }
+
+// let obj1: Partial<Person> = {
+//   name: "",
+// };
+
+// let obj2: Required<Person> = {
+//   name: "",
+//   age: 2,
+//   phone: "",
+// };
+
+// let obj3: Readonly<Person> = {
+//   name: "",
+//   age: 2,
+//   phone: "",
+// };
+
+// obj3.age = 10;
+
+//--------------------------Mapped types----------------------------
+
+interface Person {
   name: string;
-}
-interface User {
   age: number;
-}
-const u: User = { id: 1, name: "Pratik", age: 25 }; // ✅ merged
-
-interface PlayerI {
-  name: string;
-  age: number;
+  phone: String;
 }
 
-interface ProfessionI extends PlayerI {
-  profession: string;
-}
-
-type PlayerType = {
-  name: string;
-  age: number;
+type Optional<T extends Person> = {
+  [k in keyof T]?: T[k];
 };
 
-// intersection
-type ProfessionType = PlayerType & {
-  sex: String;
-};
+type newType = Optional<Person>;
 
-// union
-type tupleType = [string, number, string] | ProfessionType;
-
-const testTuple: tupleType = ["", 1, ""];
-
-export type intersectionType = PlayerI & ProfessionType;
-
-// conditional types
-
-// Generics can be extended
-type IsString<T> = T extends string ? string : number;
-
-type A = IsString<string>; // "yes"
-type B = IsString<number>; // "no"
-
-// keyof and typeof
-type PlayerKeys = keyof PlayerI;
-const user = { id: 1, name: "Pratik" };
-type PlayerTypeOf = typeof user;
-type UserKeys = keyof PlayerTypeOf;
-
-// Utility types
-interface User {
-  id: number;
-  name: string;
-  email?: string;
-}
-
-type PartialUser = Partial<User>; // All optional
-type ReadonlyUser = Readonly<User>; // All readonly
-type PickUser = Pick<User, "id" | "name">; // Select some
-type OmitUser = Omit<User, "email">; // Exclude some
-
-// Mapped types - Convert all properties in type based rule
-
-type Optional<T> = {
-  [K in keyof T]?: T[K];
-};
-
-interface Person2 {
-  name: string;
-  age: number;
-}
-
-type OptionalPerson = Optional<Person2>;
-// { name?: string; age?: number }
-
-// infer
-type ReturnTypeOf<T> = T extends (...args: any[]) => infer R ? R : never;
-
-function greet() {
-  return "Hello";
-}
-
-type GreetReturn = ReturnTypeOf<typeof greet>; // string
+type keys = keyof Person;

@@ -105,9 +105,11 @@ function validParenthesis(inputText) {
 const input = {
   name: "pratik",
   age: 28,
+  skills: ["react js"],
   address: {
     street: "begur",
     pin: "560068",
+    test: [1, 2, 3],
   },
 };
 
@@ -115,7 +117,7 @@ function cloneDeep(obj) {
   var keys = Object.keys(obj);
   let output = {};
 
-  // if primitive values for null.As null is also of type object
+  // If primitive values or null then return
   if (obj === null || typeof obj !== "object") return obj;
 
   if (Array.isArray(obj)) {
@@ -130,17 +132,49 @@ function cloneDeep(obj) {
 
 // spread operator
 
-obj1 = {
-  name: "roni",
+// obj1 = {
+//   name: "roni",
+// };
+
+// obj2 = {
+//   age: 20,
+// };
+
+// testObj = { ...obj1, ...obj2 };
+// console.log(testObj);
+
+// // rest operator
+// let { age, ...rest } = { name: "roni", age: 2, salary: 2000 };
+// console.log(rest);
+
+let arr1 = [1, 2, 3, 0, 0, 0];
+let arr2 = [2, 5, 6];
+m = 3;
+n = 3;
+
+var merge = function (nums1, m, nums2, n) {
+  let leftIndex = m - 1;
+  let rightIndex = 0;
+  while (leftIndex > -1 && rightIndex < n) {
+    if (nums1[leftIndex] >= nums2[rightIndex]) {
+      let temp = nums1[leftIndex];
+      nums1[leftIndex] = nums2[rightIndex];
+      nums2[rightIndex] = temp;
+    }
+    if (nums1[leftIndex] < nums2[rightIndex]) break;
+  }
+  // nums1.sort((a, b) => a - b);
+  nums2.sort((a, b) => a - b);
+
+  let nums1Index = m;
+  let nums2Index = 0;
+
+  while (nums2Index < n) {
+    nums1[nums1Index] = nums2[nums2Index];
+    nums1Index++;
+    nums2Index++;
+  }
+  nums1.sort((a, b) => a - b);
 };
 
-obj2 = {
-  age: 20,
-};
-
-testObj = { ...obj1, ...obj2 };
-console.log(testObj);
-
-// rest operator
-let { age, ...rest } = { name: "roni", age: 2, salary: 2000 };
-console.log(rest);
+merge(arr1, m, arr2, n);

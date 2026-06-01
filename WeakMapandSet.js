@@ -25,29 +25,30 @@ Objects/arrays are kept in memory as long as they are not garbage collected expl
 // console.log(map);
 
 // Weak map/Weak set only accepts objects as keys and are explicitly garbage collected when the object is not present
-let john = {
-  name: "John",
-};
 let john1 = {
-  name: "John",
+  name: "John1",
+};
+let john2 = {
+  name: "John2",
 };
 
 let map = new WeakMap();
-map.set(john, "value");
-map.set(john1, "value1");
-john = null;
-console.log("map value", map);
+map.set(john1, "value");
+map.set(john2, "value1");
+john1 = null;
+console.log("map value", map); // this will not show instantly as it can be asynchronous
+console.log(map.get(john1)); // undefined as it's garbage collected
 
 // weak set
-let johnSet = {
-  name: "John",
-};
-let johnSet1 = {
-  name: "John",
-};
+// let johnSet = {
+//   name: "John1",
+// };
+// let johnSet1 = {
+//   name: "John2",
+// };
 
-let set = new WeakSet();
-set.add(johnSet);
-set.add(johnSet1);
-johnSet = null;
-console.log("map value", set);
+// let set = new WeakSet();
+// set.add(johnSet);
+// set.add(johnSet1);
+// johnSet = null;
+// console.log("map value", set);
